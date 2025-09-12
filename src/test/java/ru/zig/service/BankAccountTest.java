@@ -15,30 +15,30 @@ class BankAccountTest {
 
     @Test
     public void depositTest_whenPositiveValue() {
-        bankAccount.deposit(20);
+        assertDoesNotThrow(() -> bankAccount.deposit(20));
 
         assertEquals(70, bankAccount.getBalance());
     }
 
     @Test
     public void depositTest_whenNegativeValue() {
-        bankAccount.deposit(-20);
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-20));
 
-        assertEquals(30, bankAccount.getBalance());
+        assertEquals(50, bankAccount.getBalance());
     }
 
     @Test
     public void withdrawTest_whenPositiveValue() {
-        bankAccount.withdraw(20);
+        assertDoesNotThrow(() -> bankAccount.withdraw(20));
 
         assertEquals(30, bankAccount.getBalance());
     }
 
     @Test
     public void withdrawTest_whenNegativeValue() {
-        bankAccount.withdraw(-20);
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-20));
 
-        assertEquals(70, bankAccount.getBalance());
+        assertEquals(50, bankAccount.getBalance());
     }
 
     @Test
@@ -48,7 +48,6 @@ class BankAccountTest {
 
     @Test
     public void getBalanceTest_whenNegativeValue() {
-        bankAccount = new BankAccount(-20);
-        assertEquals(-20, bankAccount.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> bankAccount = new BankAccount(-20));
     }
 }
